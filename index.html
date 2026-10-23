@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الوحدة الأولى — الكيمياء النووية | الصف الثالث الثانوي</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --primary2: #2563eb;
+    --accent: #0ea5e9;
+    --success: #059669;
+    --warn: #d97706;
+    --danger: #dc2626;
+    --bg: #f1f5f9;
+    --card: #fff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --border: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, 'Noto Naskh Arabic', Arial, sans-serif;
+    background: linear-gradient(165deg, #dbeafe 0%, #f1f5f9 45%, #e0f2fe 100%);
+    color: var(--text);
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .topbar {
+    background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+    color: #fff;
+    padding: 1rem 1.2rem 0.9rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 24px rgba(30,58,138,.35);
+  }
+  .topbar h1 { font-size: 1.3rem; margin-bottom: .15rem; }
+  .topbar .sub { font-size: .88rem; opacity: .92; }
+  .progress-track {
+    height: 5px;
+    background: rgba(255,255,255,.2);
+    border-radius: 3px;
+    margin-top: .75rem;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #34d399;
+    transition: width .35s ease;
+  }
+  .nav-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin-top: .7rem;
+    justify-content: center;
+  }
+  .nav-pills button {
+    background: rgba(255,255,255,.14);
+    border: none;
+    color: #fff;
+    padding: .35rem .85rem;
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: .82rem;
+    cursor: pointer;
+    transition: .2s;
+  }
+  .nav-pills button:hover,
+  .nav-pills button.active {
+    background: #fff;
+    color: var(--primary);
+  }
+  .wrap {
+    max-width: 860px;
+    margin: 1.4rem auto 3rem;
+    padding: 0 1rem;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(0,0,0,.06);
+    padding: 1.5rem 1.7rem;
+    margin-bottom: 1.2rem;
+    animation: fade .35s ease;
+  }
+  @keyframes fade {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+  .card h2 {
+    color: var(--primary);
+    font-size: 1.28rem;
+    margin-bottom: .9rem;
+    padding-bottom: .45rem;
+    border-bottom: 2px solid #dbeafe;
+  }
+  .card h3 {
+    color: #1d4ed8;
+    font-size: 1.08rem;
+    margin: 1.1rem 0 .5rem;
+  }
+  .card p, .card li { margin-bottom: .5rem; }
+  .card ul, .card ol { padding-right: 1.35rem; margin-bottom: .7rem; }
+  .tag {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1e40af;
+    padding: .2rem .7rem;
+    border-radius: 14px;
+    font-size: .85rem;
+    margin: .2rem .25rem;
+    font-weight: 500;
+  }
+  .box {
+    border-radius: 12px;
+    padding: .95rem 1.15rem;
+    margin: 1rem 0;
+  }
+  .box.info { background: #eff6ff; border-right: 4px solid var(--primary2); }
+  .box.ok { background: #ecfdf5; border-right: 4px solid var(--success); }
+  .box.warn { background: #fffbeb; border-right: 4px solid var(--warn); }
+  .box.danger { background: #fef2f2; border-right: 4px solid var(--danger); }
+  .formula {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: .85rem 1rem;
+    margin: .75rem 0;
+    text-align: center;
+    font-family: 'Courier New', Consolas, monospace;
+    direction: ltr;
+    font-size: 1.05rem;
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: .95rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: .55rem .7rem;
+    text-align: center;
+  }
+  th { background: var(--primary); color: #fff; }
+  tr:nth-child(even) { background: #f8fafc; }
+  .section { display: none; }
+  .section.on { display: block; }
+  .quiz-q {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.15rem;
+    margin: 1rem 0;
+  }
+  .quiz-q .qt { font-weight: 600; margin-bottom: .7rem; }
+  .quiz-opt {
+    display: block;
+    width: 100%;
+    text-align: right;
+    border: 2px solid var(--border);
+    background: #fff;
+    border-radius: 10px;
+    padding: .65rem .9rem;
+    margin: .4rem 0;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: .98rem;
+    transition: .15s;
+  }
+  .quiz-opt:hover { border-color: var(--primary2); background: #eff6ff; }
+  .quiz-opt.correct { border-color: var(--success); background: #d1fae5; color: #065f46; }
+  .quiz-opt.wrong { border-color: var(--danger); background: #fee2e2; color: #991b1b; }
+  .quiz-opt:disabled { cursor: default; }
+  .feedback {
+    display: none;
+    margin-top: .7rem;
+    padding: .7rem .9rem;
+    border-radius: 8px;
+    font-size: .95rem;
+  }
+  .feedback.show { display: block; }
+  .feedback.ok { background: #ecfdf5; color: #065f46; }
+  .feedback.bad { background: #fef2f2; color: #991b1b; }
+  .btn {
+    border: none;
+    border-radius: 10px;
+    padding: .7rem 1.3rem;
+    font-family: inherit;
+    font-size: .95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+  }
+  .btn-primary { background: var(--primary2); color: #fff; }
+  .btn-primary:hover { background: #1d4ed8; }
+  .btn-sec { background: #e2e8f0; color: #334155; }
+  .btn-sec:hover { background: #cbd5e1; }
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    gap: .6rem;
+    margin-top: 1.2rem;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: .4rem; margin: .6rem 0; }
+  .accordion {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: .5rem 0;
+    overflow: hidden;
+  }
+  .accordion summary {
+    padding: .75rem 1rem;
+    background: #f1f5f9;
+    cursor: pointer;
+    font-weight: 600;
+    list-style: none;
+  }
+  .accordion summary::-webkit-details-marker { display: none; }
+  .accordion summary::before { content: '▶ '; font-size: .75rem; color: var(--primary2); }
+  .accordion[open] summary::before { content: '▼ '; }
+  .accordion .body { padding: .9rem 1rem; }
+  .hero-img {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: .8rem 0 1rem;
+  }
+  .kpi {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: .7rem;
+    margin: 1rem 0;
+  }
+  .kpi div {
+    background: #eff6ff;
+    border-radius: 12px;
+    padding: .8rem;
+    text-align: center;
+  }
+  .kpi b { display: block; font-size: 1.35rem; color: var(--primary); }
+  .kpi span { font-size: .82rem; color: var(--muted); }
+  .footer-note {
+    text-align: center;
+    color: var(--muted);
+    font-size: .85rem;
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 600px) {
+    .topbar h1 { font-size: 1.1rem; }
+    .card { padding: 1.15rem; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>الوحدة الأولى: الكيمياء النووية</h1>
+  <div class="sub">الصف الثالث الثانوي — محاضرة تفاعلية</div>
+  <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
+  <div class="nav-pills" id="pills"></div>
+</div>
+
+<div class="wrap">
+  <!-- 0 مقدمة -->
+  <div class="section on" data-sec="0">
+    <div class="card">
+      <h2>مرحباً بك في الوحدة</h2>
+      <p>تُعد الطاقة النووية من أهم مصادر الطاقة، وتُستعمل في توليد الكهرباء، والزراعة، والطب، وتنقية مياه الشرب.</p>
+      <p>تحدث داخل الشمس تفاعلات نووية هائلة تُشعّ على شكل أمواج كهرطيسية وجسيمات تُسمى الرياح الشمسية.</p>
+      <div class="box info">
+        <strong>في هذه المحاضرة التفاعلية ستتعلم:</strong>
+        <ul>
+          <li>تركيب النواة والاستقرار النووي</li>
+          <li>أنواع النشاط الإشعاعي (α ، β ، γ ، بوزيترون)</li>
+          <li>طاقة ارتباط النواة وعمر النصف</li>
+          <li>التفاعلات النووية: التقاط، انشطار، اندماج</li>
+        </ul>
+      </div>
+      <div class="chips">
+        <span class="tag">الاستقرار النووي</span>
+        <span class="tag">النشاط الإشعاعي</span>
+        <span class="tag">طاقة الارتباط</span>
+        <span class="tag">عمر النصف</span>
+        <span class="tag">انشطار</span>
+        <span class="tag">اندماج</span>
+      </div>
+      <div class="nav-row">
+        <span></span>
+        <button class="btn btn-primary" onclick="go(1)">ابدأ التعلم ←</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1 تركيب النواة -->
+  <div class="section" data-sec="1">
+    <div class="card">
+      <h2>1. تركيب النواة</h2>
+      <ul>
+        <li>تحتوي النواة على <strong>بروتونات</strong> (+e) و<strong>نيوترونات</strong> (متعادلة).</li>
+        <li><strong>العدد الذري Z</strong> = عدد البروتونات = عدد الإلكترونات في الذرة المتعادلة.</li>
+        <li><strong>العدد الكتلي A</strong> = عدد البروتونات + عدد النيوترونات (A = Z + N).</li>
+        <li>رمز النواة: <span class="formula" style="display:inline-block;padding:.15rem .5rem">A<sub>Z</sub>X</span></li>
+      </ul>
+      <h3>رموز الجسيمات النووية</h3>
+      <table>
+        <thead><tr><th>الجسيم</th><th>الرمز</th></tr></thead>
+        <tbody>
+          <tr><td>نيوترون</td><td>¹₀n</td></tr>
+          <tr><td>بروتون</td><td>¹₁p أو ¹₁H</td></tr>
+          <tr><td>جسيم بيتا (إلكترون)</td><td>⁰₋₁e أو ⁰₋₁β</td></tr>
+          <tr><td>بوزيترون</td><td>⁰₊₁e أو ⁰₊₁β</td></tr>
+          <tr><td>جسيم ألفا</td><td>⁴₂He أو ⁴₂α</td></tr>
+        </tbody>
+      </table>
+      <div class="quiz-q" data-a="1">
+        <div class="qt">اختبر فهمك: العدد الكتلي A يساوي؟</div>
+        <button class="quiz-opt" data-i="0" onclick="answer(this)">عدد البروتونات فقط</button>
+        <button class="quiz-opt" data-i="1" onclick="answer(this)">مجموع البروتونات والنيوترونات</button>
+        <button class="quiz-opt" data-i="2" onclick="answer(this)">عدد النيوترونات فقط</button>
+        <button class="quiz-opt" data-i="3" onclick="answer(this)">عدد الإلكترونات</button>
+        <div class="feedback"></div>
+      </div>
+      <div class="nav-row">
+        <button class="btn btn-sec" onclick="go(0)">→ السابق</button>
+        <button class="btn btn-primary" onclick="go(2)">التالي ←</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 الاستقرار -->
+  <div class="section" data-sec="2">
+    <div class="card">
+      <h2>2. الاستقرار النووي</h2>
+      <p>تقع النوى المستقرة ضمن منطقة تُسمى <strong>حزام الاستقرار</strong>. النوى خارج هذا الحزام غير مستقرة وتتحوّل تلقائياً عبر النشاط الإشعاعي.</p>
+      <div class="box ok">
+        <ul>
+          <li>للعناصر الخفيفة المستقرة: <strong>N/Z ≈ 1</strong></li>
+          <li>للعناصر الثقيلة المستقرة: <strong>N/Z &gt; 1</strong> (مزيد من النيوترونات لتقليل تنافر البروتونات)</li>
+          <li>النسبة N/Z لنظير غير مستقر تختلف عن نظيره المستقر</li>
+        </ul>
+      </div>
+      <div class="quiz-q" data-a="2">
+        <div class="qt">النسبة N/Z للنوى المستقرة الثقيلة تكون:</div>
+        <button class="quiz-opt" data-i="0" onclick="answer(this)">أقل من 1</button>
+        <button class="quiz-opt" data-i="1" onclick="answer(this)">تساوي 1 تقريباً</button>
+        <button class="quiz-opt" data-i="2" onclick="answer(this)">أكبر من 1</button>
+        <button class="quiz-opt" data-i="3" onclick="answer(this)">تساوي صفر</button>
+        <div class="feedback"></div>
+      </div>
+      <div class="nav-row">
+        <button class="btn btn-sec" onclick="go(1)">→ السابق</button>
+        <button class="btn btn-primary" onclick="go(3)">التالي ←</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 نشاط إشعاعي -->
+  <div class="section" data-sec="3">
+    <div class="card">
+      <h2>3. النشاط الإشعاعي الطبيعي</h2>
+      <p>تحوّلات نووية تلقائية للنوى غير المستقرة إلى نوى أكثر استقراراً، مع انطلاق جسيمات وطاقة. يتحقق دائماً <strong>مصونية العدد الذري والكتلي</strong>.</p>
+
+      <details class="accordion" open>
+        <summary>أ. تحوّل بيتا β⁻</summary>
+        <div class="body">
+          <p>يحدث فوق حزام الاستقرار: نيوترون → بروتون + إلكترون</p>
+          <div class="formula">¹₀n → ¹₁H + ⁰₋₁e</div>
+          <div class="formula">A<sub>Z</sub>X → A<sub>Z+1</sub>Y + ⁰₋₁e + Energy</div>
+          <div class="box info">
+            مثال: ²³¹₉₀Th → ²³¹₉₁Pa + ⁰₋₁e + Energy
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>ب. تحوّل بوزيترون β⁺</summary>
+        <div class="body">
+          <p>يحدث تحت حزام الاستقرار: بروتون → نيوترون + بوزيترون</p>
+          <div class="formula">¹₁H → ¹₀n + ⁰₊₁e</div>
+          <div class="formula">A<sub>Z</sub>X → A<sub>Z−1</sub>Y + ⁰₊₁e + Energy</div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>ج. تحوّل ألفا α</summary>
+        <div class="body">
+          <p>شائع في النوى الثقيلة. ينطلق جسيم ألفا (نواة هيليوم).</p>
+          <div class="formula">A<sub>Z</sub>X → <sup>A−4</sup><sub>Z−2</sub>Y + ⁴₂He + Energy</div>
+          <div class="box info">مثال: ²²⁶₈₈Ra → ²²²₈₆Rn + ⁴₂He + Energy</div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>د. أشعة غاما γ</summary>
+        <div class="body">
+          <p>أمواج كهرطيسية عالية الطاقة تنطلق من نواة مثارة دون تغيّر في A أو Z.</p>
+        </div>
+      </details>
+
+      <div class="quiz-q" data-a="1">
+        <div class="qt">تحوّل ²³¹₉₀Th → ²³¹₉₁Pa هو من نوع:</div>
+        <button class="quiz-opt" data-i="0" onclick="answer(this)">ألفا</button>
+        <button class="quiz-opt" data-i="1" onclick="answer(this)">بيتا</button>
+        <button class="quiz-opt" data-i="2" onclick="answer(this)">بوزيترون</button>
+        <button class="quiz-opt" data-i="3" onclick="answer(this)">غاما فقط</button>
+        <div class="feedback"></div>
+      </div>
+      <div class="nav-row">
+        <button class="btn btn-sec" onclick="go(2)">→ السابق</button>
+        <button class="btn btn-primary" onclick="go(4)">التالي ←</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 مقارنة -->
+  <div class="section" data-sec="4">
+    <div class="card">
+      <h2>4. مقارنة α و β و γ</h2>
+      <table>
+        <thead>
+          <tr><th>الخاصية</th><th>ألفا α</th><th>بيتا β</th><th>غاما γ</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>الطبيعة</td><td>جسيم (نواة He)</td><td>جسيم (e⁻ أو e⁺)</td><td>موجة كهرطيسية</td></tr>
+          <tr><td>الشحنة</td><td>+2</td><td>−1 أو +1</td><td>0</td></tr>
+          <tr><td>الكتلة</td><td>كبيرة نسبياً</td><td>صغيرة جداً</td><td>عديمة الكتلة</td></tr>
+          <tr><td>الاختراق</td><td>ضعيف</td><td>متوسط</td><td>عالي جداً</td></tr>
+          <tr><td>التأيين</td><td>قوي</td><td>متوسط</td><td>ضعيف</td></tr>
+        </tbody>
+      </table>
+      <div class="quiz-q" data-a="2">
+        <div class="qt">أيها أعلى قدرة على الاختراق؟</div>
+        <button class="quiz-opt" data-i="0" onclick="answer(this)">جسيمات ألفا</button>
+        <button class="quiz-opt" data-i="1" onclick="answer(this)">جسيمات بيتا</button>
+        <button class="quiz-opt" data-i="2" onclick="answer(this)">أشعة غاما</button>
+        <div class="feedback"></div>
+      </div>
+      <div class="nav-row">
+        <button class="btn btn-sec" onclick="go(3)">→ السابق</button>
+        <button class="btn btn-primary" onclick="go(5)">التالي ←</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 طاقة ارتباط -->
+  <div class="section" data-sec="5">
+    <div class="card">
+      <h2>5. طاقة ارتباط النواة</h2>
+      <p>هي الطاقة اللازمة لتفكيك النواة إلى بروتوناتها ونيوتروناتها المنفصلة، أو الطاقة المنطلقة عند تكوّن النواة منها.</p>
+      <div class="formula">E<sub>b</sub> = Δm · c²</div>
+      <p><strong>نقص الكتلة Δm</strong> = (كتلة البروتونات + النيوترونات وهي منفصلة) − كتلة النواة الفعلية.</p>
+      <div class="box ok">كلما زادت طاقة الارتباط لكل نيوكليون، زادت استقرار النواة.</div>
+      <div class="quiz-q" data-a="1">
+        <div class="qt">طاقة الارتباط تُحسب من:</div>
+        <button class="quiz-opt" data-i="0" onclick="answer(this)">E = mc</button>
+        <button class="quiz-opt" data-i="1" onclick="answer(this)">E = Δm × c²</button>
+        <button class="quiz-opt" data-i="2" onclick="answer(this)">E = hν فقط</button>
+        <button class="quiz-opt" data-i="3" onclick="answer(this)">E = ½ mv²</button>
+        <div class="feedback"></div>
+      </div>
+      <div class="nav-row">
+        <button class="btn btn-sec" onclick="go(4)">→ السابق</button>
+        <button class="btn btn-primary" onclick="go(6)">التالي ←</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 عمر النصف -->
+  <div class="section" data-sec="6">
+    <div class="card">
+      <h2>6. عمر النصف t<sub>½</sub></h2>
+      <p>الزمن اللازم لتفكك <strong>نصف</strong> كمية المادة المشعة.</p>
+      <div class="formula">N = N₀ × (½)<sup>n</sup> &nbsp;&nbsp;,&nbsp;&nbsp; n = t / t<sub>½</sub></div>
+      <div class="box warn">
+        مثال: إذا كان t<sub>½</sub> = 2 ساعة، فبعد 6 ساعات (3 أعمار نصف) يتبقى <strong>1/8</strong> الكمية الأصلية.
+      </div>
+      <div class="kpi">
+        <div><b>N₀</b><span>الكمية الابتدائية</span></div>
+        <div><b>N</b><span>الكمية المتبقية</span></div>
+        <div><b>n</b><span>عدد أعمار النصف</span></div>
+      </div>
+      <div class="quiz-q" data-a="2">
+        <div class="qt">عمر النصف = 3 ساعات. بعد 9 ساعات يتبقى:</div>
+        <button class="quiz-opt" data-i="0" onclick="answer(this)">½</button>
+        <button class="quiz-opt" data-i="1" onclick="answer(this)">¼</button>
+        <button class="quiz-opt" data-i="2" onclick="answer(this)">⅛</button>
+        <button class="quiz-opt" data-i="3" onclick="answer(this)">1/16</button>
+        <div class="feedback"></div>
+      </div>
+      <div class="nav-row">
+        <button class="btn btn-sec" onclick="go(5)">→ السابق</button>
+        <button class="btn btn-primary" onclick="go(7)">التالي ←</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 تفاعلات -->
+  <div class="section" data-sec="7">
+    <div class="card">
+      <h2>7. التفاعلات النووية</h2>
+
+      <h3>تفاعل التقاط</h3>
+      <p>التقاط النواة لجسيم (غالباً نيوترون) لتكوين نواة مركبة قد تكون مثارة.</p>
+
+      <h3>الانشطار النووي</h3>
+      <p>انقسام نواة ثقيلة (مثل ²³⁵U) إلى نواتين متوسطتين + نيوترونات + طاقة هائلة.</p>
+      <div class="formula">²³⁵₉₂U + ¹₀n → نواتان متوسطتان + نيوترونات + طاقة</div>
+
+      <h3>الاندماج النووي</h3>
+      <p>اتحاد نوى خفيفة (نظائر الهيدروجين) لتكوين نواة أثقل مع انطلاق طاقة كبيرة — مصدر طاقة الشمس.</p>
+      <div class="formula">²₁H + ³₁H → ⁴₂He + ¹₀n + طاقة</div>
+
+      <div class="box info">
+        <strong>فرق أساسي:</strong> الانشطار = نواة ثقيلة تنقسم | الاندماج = نوى خفيفة تتحد
+      </div>
+
+      <div class="quiz-q" data-a="1">
+        <div class="qt">مصدر طاقة الشمس هو:</div>
+        <button class="quiz-opt" data-i="0" onclick="answer(this)">الانشطار النووي</button>
+        <button class="quiz-opt" data-i="1" onclick="answer(this)">الاندماج النووي</button>
+        <button class="quiz-opt" data-i="2" onclick="answer(this)">تحلل ألفا فقط</button>
+        <button class="quiz-opt" data-i="3" onclick="answer(this)">تفاعلات كيميائية</button>
+        <div class="feedback"></div>
+      </div>
+      <div class="nav-row">
+        <button class="btn btn-sec" onclick="go(6)">→ السابق</button>
+        <button class="btn btn-primary" onclick="go(8)">ملخص واختبار ←</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8 ملخص + اختبار سريع -->
+  <div class="section" data-sec="8">
+    <div class="card">
+      <h2>ملخص سريع</h2>
+      <ul>
+        <li>A = Z + N &nbsp;|&nbsp; الاستقرار مرتبط بنسبة N/Z وحزام الاستقرار</li>
+        <li>β⁻ يزيد Z بواحد &nbsp;|&nbsp; β⁺ ينقص Z بواحد &nbsp;|&nbsp; α ينقص A بـ 4 و Z بـ 2</li>
+        <li>γ لا تغيّر A ولا Z</li>
+        <li>E<sub>b</sub> = Δm c² &nbsp;|&nbsp; عمر النصف زمن تفكك النصف</li>
+        <li>انشطار: ثقيلة تنقسم &nbsp;|&nbsp; اندماج: خفيفة تتحد (الشمس)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>اختبار سريع ختامي</h2>
+      <div class="quiz-q" data-a="2">
+        <div class="qt">1) عند انطلاق α فإن A ينقص بمقدار:</div>
+        <button class="quiz-opt" data-i="0" onclick="answer(this)">1</button>
+        <button class="quiz-opt" data-i="1" onclick="answer(this)">2</button>
+        <button class="quiz-opt" data-i="2" onclick="answer(this)">4</button>
+        <button class="quiz-opt" data-i="3" onclick="answer(this)">0</button>
+        <div class="feedback"></div>
+      </div>
+      <div class="quiz-q" data-a="1">
+        <div class="qt">2) عمر النصف هو زمن:</div>
+        <button class="quiz-opt" data-i="0" onclick="answer(this)">تفكك كل المادة</button>
+        <button class="quiz-opt" data-i="1" onclick="answer(this)">تفكك نصف المادة</button>
+        <button class="quiz-opt" data-i="2" onclick="answer(this)">تضاعف المادة</button>
+        <div class="feedback"></div>
+      </div>
+      <div class="quiz-q" data-a="0">
+        <div class="qt">3) مصونية الأعداد في التحوّلات النووية تعني حفظ:</div>
+        <button class="quiz-opt" data-i="0" onclick="answer(this)">A و Z معاً</button>
+        <button class="quiz-opt" data-i="1" onclick="answer(this)">A فقط</button>
+        <button class="quiz-opt" data-i="2" onclick="answer(this)">Z فقط</button>
+        <div class="feedback"></div>
+      </div>
+      <div class="box ok" id="finalMsg" style="display:none;text-align:center">
+        أحسنت! راجعت أهم مفاهيم الوحدة. يمكنك إعادة الأقسام من الشريط العلوي.
+      </div>
+      <div class="nav-row">
+        <button class="btn btn-sec" onclick="go(7)">→ السابق</button>
+        <button class="btn btn-primary" onclick="document.getElementById('finalMsg').style.display='block'; celebrate();">إنهاء المحاضرة</button>
+      </div>
+    </div>
+    <p class="footer-note">الأولمبياد العلمي السوري — العلوم النووية | محاضرة تفاعلية</p>
+  </div>
+</div>
+
+<canvas id="fw" style="position:fixed;inset:0;pointer-events:none;z-index:999"></canvas>
+
+<script>
+const TITLES = ['مقدمة','تركيب النواة','الاستقرار','النشاط الإشعاعي','مقارنة α β γ','طاقة الارتباط','عمر النصف','التفاعلات','ملخص'];
+const pills = document.getElementById('pills');
+TITLES.forEach((t,i) => {
+  const b = document.createElement('button');
+  b.textContent = (i+1) + '. ' + t;
+  b.onclick = () => go(i);
+  if (i===0) b.classList.add('active');
+  pills.appendChild(b);
+});
+
+let cur = 0;
+function go(n) {
+  cur = n;
+  document.querySelectorAll('.section').forEach(s => s.classList.toggle('on', +s.dataset.sec === n));
+  document.querySelectorAll('.nav-pills button').forEach((b,i) => b.classList.toggle('active', i===n));
+  document.getElementById('prog').style.width = ((n+1)/TITLES.length*100) + '%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function answer(btn) {
+  const box = btn.closest('.quiz-q');
+  if (box.dataset.done) return;
+  box.dataset.done = '1';
+  const correct = +box.dataset.a;
+  const fb = box.querySelector('.feedback');
+  box.querySelectorAll('.quiz-opt').forEach(o => {
+    o.disabled = true;
+    if (+o.dataset.i === correct) o.classList.add('correct');
+  });
+  if (+btn.dataset.i === correct) {
+    btn.classList.add('correct');
+    fb.className = 'feedback show ok';
+    fb.textContent = '✓ إجابة صحيحة';
+    burst();
+  } else {
+    btn.classList.add('wrong');
+    fb.className = 'feedback show bad';
+    fb.textContent = '✗ خطأ — الإجابة الصحيحة مظللة بالأخضر';
+  }
+}
+
+/* confetti */
+const cv = document.getElementById('fw'), ctx = cv.getContext('2d');
+let parts = [];
+function resize(){ cv.width = innerWidth; cv.height = innerHeight; }
+addEventListener('resize', resize); resize();
+function burst() {
+  for (let i=0;i<28;i++) parts.push({
+    x: innerWidth/2 + (Math.random()-0.5)*120,
+    y: innerHeight*0.35,
+    vx: (Math.random()-0.5)*8,
+    vy: -Math.random()*6-2,
+    c: ['#2563eb','#059669','#f59e0b','#ef4444','#8b5cf6'][i%5],
+    life: 60+Math.random()*30
+  });
+}
+function celebrate(){ for(let i=0;i<5;i++) setTimeout(burst, i*200); }
+(function loop(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  parts = parts.filter(p => {
+    p.x += p.vx; p.y += p.vy; p.vy += 0.15; p.life--;
+    ctx.globalAlpha = Math.max(0, p.life/60);
+    ctx.fillStyle = p.c;
+    ctx.fillRect(p.x, p.y, 6, 6);
+    return p.life > 0;
+  });
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
